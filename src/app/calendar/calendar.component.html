@@ -1,0 +1,74 @@
+<div class="calendar-container">
+  <div class="calendar-header">
+    <h1>
+      {{month}}
+    </h1>
+    <p>{{year}}</p>
+  </div>
+  <div class="calendar"><span class="day-name">Mon</span><span class="day-name">Tue</span><span
+    class="day-name">Wed</span><span class="day-name">Thu</span><span class="day-name">Fri</span><span class="day-name">Sat</span><span
+    class="day-name">Sun</span>
+    <div class="day" *ngFor="let i of range">
+      <p>{{dates[i]}}</p>
+      <div *ngFor="let event of chk()">
+        <div class="task" [ngClass]="getClassColor(event.days)" *ngIf="exist(event.days, dates[i])"><span
+          *ngIf="event.imp" style="color: red; line-height: 100%">!&nbsp;</span>{{event.name}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<table id="table" style="margin-top: 30px;">
+
+  <tr>
+    <th>Название</th>
+    <th>Даты</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td colspan="4" style="padding: 0">
+      <input [(ngModel)]="txt" style="width: calc(100% - 20px); margin: 0; padding: 3px 10px; border: none"
+             placeholder="Поиск">
+    </td>
+  </tr>
+  <tr *ngFor="let event_l of chk() | appFilter: txt; let i = index">
+    <td *ngIf="show(event_l.days)"><span style="color: red" *ngIf="event_l.imp">!&nbsp;</span>{{event_l.name}}</td>
+    <td *ngIf="show(event_l.days)">{{event_l.days}}</td>
+    <td style="width: 100px; cursor: pointer;" *ngIf="show(event_l.days)" (click)="star(i)">Важное</td>
+    <td *ngIf="show(event_l.days)" style="width: 100px; cursor: pointer;"
+        (click)="edit = true; toedit = i; editTitle = event_l.name; editDates = toStr(event_l.days); create = false;">
+      Редактировать
+    </td>
+  </tr>
+</table>
+<div style="width: 100%; float: right; display: block;">
+  <button *ngIf="!create" (click)="create = true; edit = false;">Добавить событие</button>
+  <button *ngIf="create" (click)="create = false; xmessage = ''; xdates = ''; xtitle = '';">Закрыть</button>
+</div>
+
+<div
+  style="float: right; width: calc(100% - 30px); display: block; padding: 15px; border-radius: 5px; border: 2px rgb(14, 125, 196) solid; margin-bottom: 40px;"
+  *ngIf="create">
+  Введите название события:
+  <input placeholder="Название события" [(ngModel)]="xtitle">
+  Введите даты через запятую:
+  <input [(ngModel)]="xdates" placeholder="Пример: 01.01.2020,02.01.2020">
+  <div class="comment" *ngIf="xmessage">
+    {{xmessage}}
+  </div>
+  <button (click)="publish()">Готово</button>
+</div>
+<div
+  style="float: right; width: calc(100% - 30px); display: block; padding: 15px; border-radius: 5px; border: 2px rgb(14, 125, 196) solid; margin-bottom: 40px;"
+  *ngIf="edit">
+  Введите название события:
+  <input placeholder="Название события" [(ngModel)]="editTitle">
+  Введите даты через запятую:
+  <input [(ngModel)]="editDates" placeholder="Пример: 01.01.2020,02.01.2020">
+  <div class="comment" *ngIf="editMessage">
+    {{editMessage}}
+  </div>
+  <button (click)="editPublish()">Готово</button>
+  <button (click)="edit = false;" style="margin-left: 10px;">Закрыть</button>
+</div>

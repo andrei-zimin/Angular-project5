@@ -1,0 +1,63 @@
+<div class="section"
+     style="background: url('https://tarif-online.ru/wp-content/uploads/2020/01/Kontakty-Rostelekom-v-drugih-gorodah.jpg') no-repeat center/cover">
+  <div class="overlay">
+    <h1>Контакты</h1>
+    <div class="links">
+      <span routerLink="/home">Главная</span>
+      <span routerLink="/volga">МРФ "Волга"</span>
+      <span routerLink="/sibir">МРФ "Сибирь"</span>
+      <span routerLink="/corpcenter">Корпоративный центр</span>
+      <span routerLink="/contacts">Контакты</span>
+      <span routerLink="/signin" *ngIf="!isAuth()">Вход/Регистрация</span>
+      <span (click)="logout()" *ngIf="isAuth()">Выход</span>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div id="content">
+    <h3>Контактная информация</h3>
+    <p>
+      <b>Адрес:</b> 123298, Москва, ул. 3-я Хорошевская, дом 17, корп.1
+    </p>
+    <p>
+      <b>Телефон:</b> +7 (499) 998-16-16
+    </p>
+    <p>
+      <b>Факс:</b> +7 (499) 998-16-15
+    </p>
+    <p>
+      <b>Email:</b> info@center.rt.ru
+    </p>
+    <h3>Департамент внешних коммуникаций:</h3>
+    <p>
+      <b>Телефон:</b> 8 (499) 995-41-79
+    </p>
+    <h3>Отдел продаж:</h3>
+    <p>
+      <b>Телефон:</b> 8-800-100-08-00
+    </p>
+    <h3> Служба поддержки клиентов:</h3>
+    <p>
+      <b>Физических лиц:</b> 8-800-450-0-150
+    </p>
+    <p>
+      <b>Юридических лиц:</b> 8-800-200-3-000
+    </p>
+    <p>
+      <b>Email:</b>  clients@center.rt.ru
+    </p>
+    <h2 align="center"><font color="red">Служба технической поддержки всегда готова Вам помочь</font> </h2>
+
+    <div style="height:78px; width:512px;  margin: auto; background-color:#EDEDED;
+border-left:4px solid #8B8B8B;" align="center">
+      <q>Мы можем не знать Вашего вопрса, но знать на него ответ, потому что мы имеем самую огромную базу вопросов по различным категориям.</q>
+      <p align="right"><sub>Служба поддержки</sub></p>
+    </div>
+    <p></p>
+
+  </div>
+  <br>
+  <div class="comment">
+    Обращаясь с вопросом, будь уверен - ты знаешь ответ
+  </div>
+</div>

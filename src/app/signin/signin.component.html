@@ -1,0 +1,51 @@
+<div class="section"
+     style="background: url('http://www.t-reklamy.ru/upload/resize_cache/iblock/3d4/600_425_2/RQOKk0zCIsA.jpg') no-repeat center/cover">
+  <div class="overlay">
+    <h1>Вход/Регистрация</h1>
+    <div class="links">
+      <span routerLink="/home">Главная</span>
+      <span routerLink="/volga">МРФ "Волга"</span>
+      <span routerLink="/sibir">МРФ "Сибирь"</span>
+      <span routerLink="/corpcenter">Корпоративный центр</span>
+      <span routerLink="/contacts">Контакты</span>
+      <span routerLink="/signin" *ngIf="!isAuth()">Вход/Регистрация</span>
+      <span (click)="logout()" *ngIf="isAuth()">Выход</span>
+    </div>
+  </div>
+</div>
+<div class="loading" *ngIf="loading">
+    <span>
+      Loading
+    </span>
+</div>
+<div class="content">
+  <form [formGroup]="clientForm">
+    Email:
+    <input type="email" name="email" formControlName="em" [(ngModel)]="email">
+    <div class="comment" *ngIf="em.invalid && (em.touched || em.dirty)">
+      <span *ngIf="em.errors?.required">Обязательное поле</span>
+      <span *ngIf="em.errors?.pattern">Проверьте правильность ввода email</span>
+    </div>
+    Пароль:
+    <input type="password" name="password" formControlName="pw" [(ngModel)]="password">
+    <div class="comment" *ngIf="pw.invalid && (pw.touched || pw.dirty)">
+      <span *ngIf="pw.errors?.required">Обязательное поле</span>
+      <span *ngIf="pw.errors?.minlength">Пароль должен содержать не менее 6 символов</span>
+    </div>
+    Выбрать отдел:
+    <select [(ngModel)]="type" name="type" formControlName="sl">
+      <option value="volga">МРФ "Волга"</option>
+      <option value="sibir">МРФ "Сибирь"</option>
+      <option value="corpcenter">Корпоративный центр</option>
+    </select>
+    <div class="comment" *ngIf="sl.invalid && (sl.touched || sl.dirty)">
+      <span *ngIf="sl.errors?.required">Обязательное поле</span>
+    </div>
+  </form>
+  <div class="comment" *ngIf="error">
+    {{error}}
+  </div>
+  <button (click)="logIn()">Вход</button>
+  <button style="margin-left: 10px;" (click)="createAccount()">Регистрация</button>
+
+</div>
